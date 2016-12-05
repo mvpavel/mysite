@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   before_action :set_page, only: [:show, :edit, :update, :destroy]
-before_filter :authenticate_user!, only: [:about_blog]
+before_filter :authenticate_user!, only: [:index, :create, :edit, :update, :destroy]
   # GET /pages
   # GET /pages.json
   def index
@@ -28,7 +28,7 @@ before_filter :authenticate_user!, only: [:about_blog]
 
     respond_to do |format|
       if @page.save
-        format.html { redirect_to @page, notice: 'Page was successfully created.' }
+        format.html { redirect_to @page, notice: 'Страница была успешно создана.' }
         format.json { render :show, status: :created, location: @page }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ before_filter :authenticate_user!, only: [:about_blog]
   def update
     respond_to do |format|
       if @page.update(page_params)
-        format.html { redirect_to @page, notice: 'Page was successfully updated.' }
+        format.html { redirect_to @page, notice: 'Страница была успешно обновлена.' }
         format.json { render :show, status: :ok, location: @page }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ before_filter :authenticate_user!, only: [:about_blog]
   def destroy
     @page.destroy
     respond_to do |format|
-      format.html { redirect_to pages_url, notice: 'Page was successfully destroyed.' }
+      format.html { redirect_to pages_url, notice: 'Страница была успешно удалена.' }
       format.json { head :no_content }
     end
   end
@@ -65,6 +65,7 @@ before_filter :authenticate_user!, only: [:about_blog]
     # Use callbacks to share common setup or constraints between actions.
     def set_page
       @page = Page.find(params[:id])
+
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
